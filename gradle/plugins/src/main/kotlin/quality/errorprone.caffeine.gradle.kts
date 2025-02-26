@@ -21,8 +21,8 @@ sourceSets.configureEach {
 dependencies {
   errorprone(libs.nullaway)
   errorprone(libs.errorprone)
-  errorprone(libs.errorprone.mockito)
-  errorprone(libs.bundles.errorprone.support)
+//  errorprone(libs.errorprone.mockito)
+//  errorprone(libs.bundles.errorprone.support)
 }
 
 // Gradle rewrites ErrorProne's dependency on Caffeine to a project dependency, which then fails.
@@ -64,7 +64,7 @@ tasks.withType<JavaCompile>().configureEach {
         append(".*")
       })
       disabledChecks().forEach { disable(it) }
-
+      errorproneArgs.add("-XepWarnOnUnneededSuppressions")
       nullaway {
         if (java.toolchain.languageVersion.get().canCompileOrRun(17)) {
           annotatedPackages.add("org.junit.jupiter")
@@ -88,16 +88,16 @@ fun disabledChecks() = listOf(
   "AssignmentExpression",
   "AvoidObjectArrays",
   "CannotMockMethod",
-  "ConstantNaming",
-  "IsInstanceLambdaUsage",
+  //"ConstantNaming",
+  //"IsInstanceLambdaUsage",
   "Java8ApiChecker",
-  "LexicographicalAnnotationListing",
+  //"LexicographicalAnnotationListing",
   "MissingSummary",
   "MultipleTopLevelClasses",
   "PatternMatchingInstanceof",
-  "Slf4jLoggerDeclaration",
+  //"Slf4jLoggerDeclaration",
   "StatementSwitchToExpressionSwitch",
-  "StaticImport",
+  //"StaticImport",
   "SuppressWarningsWithoutExplanation",
   "UngroupedOverloads",
 
